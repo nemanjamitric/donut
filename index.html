@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Donut</title>
@@ -7,32 +8,38 @@
     <head>
         <meta charset="UTF-8">
         <title>Donut</title>
-        
+
         <meta name="description" content="Explore the mesmerizing Donut visualization.">
-    
+
         <meta name="keywords" content="donut, code, art, visualization, javascript, Nemanja Mitric">
-        
+
         <link rel="canonical" href="https://nemanjamitric.github.io/donut/">
-        
+
         <meta property="og:title" content="Donut - A Fascinating Code Art Visualization">
         <meta property="og:description" content="Explore the mesmerizing Donut visualization.">
         <meta property="og:image" content="https://ibb.co/HKVxd7n">
         <meta property="og:url" content="https://nemanjamitric.github.io/donut/">
-        
+
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Donut - A Fascinating Code Art Visualization">
         <meta name="twitter:description" content="Explore the mesmerizing Donut visualization.">
         <meta name="twitter:image" content="https://ibb.co/HKVxd7n">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
 
-        <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-16x16.png">
-        <link rel="manifest" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/site.webmanifest">
-        <link rel="mask-icon" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+        <link rel="apple-touch-icon" sizes="180x180"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-16x16.png">
+        <link rel="manifest"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/site.webmanifest">
+        <link rel="mask-icon"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/safari-pinned-tab.svg"
+            color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
     </head>
@@ -43,10 +50,12 @@
             padding: 0;
             transition: background-color 0.6s, color 0.6s;
         }
+
         pre {
             font-family: monospace;
             line-height: 150%;
         }
+
         .code-editor {
             font-family: 'Courier New', monospace;
             padding: 20px;
@@ -54,45 +63,54 @@
             color: #333;
             border-radius: 51px;
             background: linear-gradient(145deg, #e6e6e6, #ffffff);
-            box-shadow:  20px 20px 60px #d1d1d1,
-                        -20px -20px 60px #ffffff;
+            box-shadow: 20px 20px 60px #d1d1d1,
+                -20px -20px 60px #ffffff;
         }
+
         .code-editor.dark-mode {
             background-color: #333;
             color: #fff;
             border-color: #444;
             border-radius: 51px;
             background: linear-gradient(145deg, #0f0f0f, #121212);
-            box-shadow:  20px 20px 60px #0e0e0e,
-                        -20px -20px 60px #141414;
+            box-shadow: 20px 20px 60px #0e0e0e,
+                -20px -20px 60px #141414;
         }
+
         body.light-mode {
             background-color: #fff;
             color: #000;
         }
+
         body.dark-mode {
             background-color: #111;
             color: #fff;
         }
+
         .header-container {
             display: flex;
             align-items: center;
             justify-content: space-around;
         }
+
         .header-container h1 {
             font-size: 24px;
             font-weight: 600;
         }
+
         .header-container p {
             font-size: 18px;
         }
+
         .switch-container {
             display: flex;
             align-items: center;
         }
+
         .switch-label {
             margin-right: 10px;
         }
+
         .switch {
             display: inline-block;
             width: 50px;
@@ -102,6 +120,7 @@
             position: relative;
             cursor: pointer;
         }
+
         .slider {
             position: absolute;
             width: 20px;
@@ -112,18 +131,22 @@
             left: 3px;
             transition: transform 0.2s;
         }
+
         input[type="checkbox"] {
             display: none;
         }
-        input[type="checkbox"]:checked + .slider {
+
+        input[type="checkbox"]:checked+.slider {
             transform: translateX(24px);
         }
+
         .main-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             height: 100%;
         }
+
         .donut-container {
             display: flex;
             flex-direction: column;
@@ -132,12 +155,14 @@
             height: 100vh;
             margin-top: -50px
         }
+
         section {
             height: 180vh;
             overflow: hidden;
         }
     </style>
 </head>
+
 <body>
 
     <section>
@@ -186,7 +211,87 @@ i &lt; count; i++) {arr[i]=val;}};                           let updateArea= ()=
             </div>
         </div>
     </section>
-<script>
+    <section>
+        <h2>Understanding the ASCII Donut</h2>
+        <p>
+            ASCII art, using characters to represent images, dates back to the early days of computing. The 3D spinning
+            donut takes this a step further by creating an illusion of three-dimensionality.
+        </p>
+
+        <h3>The Mathematical Foundation</h3>
+        <p>
+            At the heart of this visual marvel is mathematics. The donut shape can be described using parametric
+            equations. These equations use angles (typically referred to as theta and phi) to compute the coordinates
+            for points on the surface of a torus (the geometric term for a donut shape).
+        </p>
+
+        <p>The basic equations for a torus are as follows:</p>
+        <ul>
+            <li>x(θ,ϕ)=(R+rcos(θ))cos(ϕ)</li>
+            <li>y(θ,ϕ)=(R+rcos(θ))sin(ϕ)</li>
+            <li>z(θ,ϕ)=rsin(θ)</li>
+        </ul>
+        <p>
+            where R is the distance from the center of the torus tube to the center of the torus, r is the radius of the
+            torus tube, and θ and ϕ are the angles that define the position on the torus.
+        </p>
+
+        <h3>Rendering in ASCII</h3>
+        <p>
+            The next step is projecting these 3D coordinates onto a 2D plane (the screen) and representing them with
+            ASCII characters. The code uses sine and cosine functions to rotate the torus, creating the spinning effect.
+            The characters chosen for rendering are based on the brightness of the point on the torus, creating a sense
+            of depth and shadow.
+        </p>
+
+        <h3>The process involves several steps:</h3>
+
+        <ol>
+            <li>
+                <b>Rotation and Projection:</b> The 3D coordinates of the torus are rotated and then projected onto a 2D
+                plane.
+                This involves transforming the coordinates and simulating a camera perspective.
+            </li>
+            <li>
+                <b>Brightness Calculation:</b> Each point's brightness is calculated based on its position and the
+                assumed light source direction. This determines which ASCII character to use.
+            </li>
+            <li>
+                <b>Drawing on Screen:</b> The appropriate ASCII character is placed in the corresponding position on the
+                screen, creating the visual representation of the torus.
+            </li>
+            <li>
+                <b>Animation:</b> By continuously updating the angles and redrawing the torus at a high frame rate, the
+                donut appears to spin smoothly.
+            </li>
+        </ol>
+
+        <h3>Educational Significance</h3>
+        <p>This website serves as an excellent educational tool, demonstrating complex concepts like 3D projection,
+            rotational mathematics, and ASCII art rendering in an accessible and visually appealing way. It showcases
+            how theoretical mathematics and computer science concepts can be applied to create engaging visual
+            experiences.
+        </p>
+
+        <p>
+            In conclusion, the ASCII spinning donut is a beautiful blend of art and science, offering a practical
+            application of mathematical theory and programming skills that captivates and educates simultaneously.
+        </p>
+
+        <h3>Acknowledgment to Andy Sloane</h3>
+
+        <p>
+            The mesmerizing 3D spinning donut in ASCII, featured on this website, draws its inspiration from the
+            pioneering work of Andy Sloane. Andy originally conceived and implemented this creative concept in C back in
+            2006. His innovative approach to visualizing complex mathematical ideas in such an accessible and engaging
+            format has been a source of inspiration for enthusiasts and developers alike. To explore more of Andy
+            Sloane's fascinating projects and contributions to the world of programming and mathematics, visit his
+            website at <a href="https://www.a1k0n.net" target="_blank">a1k0n.net</a>. His work exemplifies the
+            intersection of artistic creativity and technical expertise, providing a unique and captivating experience
+            for audiences around the globe.
+        </p>
+    </section>
+    <script>
                                                       const areaW=80;
                                                 const areaH = 24;const area
                                           =new Array( areaW*areaH ).fill(0);const
@@ -241,4 +346,5 @@ i &lt; count; i++) {arr[i]=val;}};                           let updateArea= ()=
     });
 </script>
 </body>
+
 </html>
