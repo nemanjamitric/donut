@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donut</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Donut</title>
+        
+        <meta name="description" content="Explore the mesmerizing Donut visualization.">
+    
+        <meta name="keywords" content="donut, code, art, visualization, javascript, Nemanja Mitric">
+        
+        <link rel="canonical" href="https://nemanjamitric.github.io/donut/">
+        
+        <meta property="og:title" content="Donut - A Fascinating Code Art Visualization">
+        <meta property="og:description" content="Explore the mesmerizing Donut visualization.">
+        <meta property="og:image" content="https://ibb.co/HKVxd7n">
+        <meta property="og:url" content="https://nemanjamitric.github.io/donut/">
+        
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Donut - A Fascinating Code Art Visualization">
+        <meta name="twitter:description" content="Explore the mesmerizing Donut visualization.">
+        <meta name="twitter:image" content="https://ibb.co/HKVxd7n">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+
+        <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-16x16.png">
+        <link rel="manifest" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/site.webmanifest">
+        <link rel="mask-icon" href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.6s, color 0.6s;
+        }
+        pre {
+            font-family: monospace;
+            line-height: 150%;
+        }
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background-color: #fff;
+            color: #333;
+            border-radius: 51px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow:  20px 20px 60px #d1d1d1,
+                        -20px -20px 60px #ffffff;
+        }
+        .code-editor.dark-mode {
+            background-color: #333;
+            color: #fff;
+            border-color: #444;
+            border-radius: 51px;
+            background: linear-gradient(145deg, #0f0f0f, #121212);
+            box-shadow:  20px 20px 60px #0e0e0e,
+                        -20px -20px 60px #141414;
+        }
+        body.light-mode {
+            background-color: #fff;
+            color: #000;
+        }
+        body.dark-mode {
+            background-color: #111;
+            color: #fff;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .header-container h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .header-container p {
+            font-size: 18px;
+        }
+        .switch-container {
+            display: flex;
+            align-items: center;
+        }
+        .switch-label {
+            margin-right: 10px;
+        }
+        .switch {
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            background-color: #ccc;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+        .slider {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.2s;
+        }
+        input[type="checkbox"] {
+            display: none;
+        }
+        input[type="checkbox"]:checked + .slider {
+            transform: translateX(24px);
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+        .donut-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: -50px
+        }
+        section {
+            height: 180vh;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <div class="header-container">
+            <p>Nemanja Mitric</p>
+            <h1>Donut</h1>
+            <div class="switch-container">
+                <label class="switch-label" for="theme-switch">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="theme-switch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="donut-container">
+                <pre class="donut" id="areaId"></pre>
+            </div>
+            <div class="code-editor">
+                <pre>                                     const areaW=80;
+                               const areaH = 24;const area
+                         =new Array( areaW*areaH ).fill(0);const
+                    areaElement = document.getElementById( 'areaId');
+                const clearArea = () =&gt;{ area.fill(0); };const drawToArea
+            =(x, y, color)=&gt;{if(x &gt;= 0 &amp;&amp; x &lt; areaW &amp;&amp; y&gt;=0 &amp;&amp; y&lt;areaH){const
+         index=y * areaW+x; area[index] = color; }}; const renderArea= () =&gt;{let
+      result = ''; for (let i = 0; i&lt;area.length; i++) {result+=" .,-~:;=!*#$"[area
+    [i] || 0]; if((i + 1)%areaW===0){result += '\n';}}areaElement.textContent=result;
+  };const main=()=&gt;{ clearArea(); let               A=0;let B=0;const sin=(x)=&gt;{return(
+ Math.sin(x))}; const cos = (x)=&gt;{                     return Math.cos(x);}; const floor
+ =(x) =&gt;{return Math.floor(x);};                         const round = (x)=&gt;{return Math
+.round(x);}; const memset=(arr,                           val, count) =&gt; { for (let i = 0;
+i &lt; count; i++) {arr[i]=val;}};                           let updateArea= ()=&gt;{clearArea()
+ ;for(let j = 0;j &lt; 6.28;j+=0.07                         ){for (let i=0; i &lt;6.28;i+=0.02)
+ {const c = sin(i); const d=cos(j)                     ;const e = sin(A);const f = sin(j)
+  ;const g =cos(A);const h =d+2;const               D=1/(c* h * e + f * g + 5);const l=
+    cos(i); const m = cos(B);const n = sin(B); const t = c * h *g - f*e;const x=round
+      (40 + 30 * D * (l * h * m - t * n)); const y = round(12 + 15 * D * (l * h*n +
+         t * m));const o = x + areaW * y; const N = round(8 * ((f * e- c * d*g)*
+            m - c * d * e - f *g-l * d * n)); if (y &gt;= 0 &amp;&amp; y &lt; areaH &amp;&amp; x&gt;=0
+                &amp;&amp; x &lt; areaW &amp;&amp; D &gt; area[o] ) { area[o] = D; drawToArea(x
+                   ,y,N &gt; 0?N:0);}}}};const loop= () =&gt;{ updateArea()
+                         ;renderArea() ; A += 0.04 ; B += 0.02;
+                               requestAnimationFrame(loop)}
+                                      loop()};main()</pre>
+            </div>
+        </div>
+    </section>
+<script>
+                                                      const areaW=80;
+                                                const areaH = 24;const area
+                                          =new Array( areaW*areaH ).fill(0);const
+                                     areaElement = document.getElementById( 'areaId');
+                                 const clearArea = () =>{ area.fill(0); };const drawToArea
+                             =(x, y, color)=>{if(x >= 0 && x < areaW && y>=0 && y<areaH){const
+                          index=y * areaW+x; area[index] = color; }}; const renderArea= () =>{let
+                       result = ''; for (let i = 0; i<area.length; i++) {result+=" .,-~:;=!*#$"[area
+                     [i] || 0]; if((i + 1)%areaW===0){result += '\n';}}areaElement.textContent=result;
+                   };const main=()=>{ clearArea(); let               A=0;let B=0;const sin=(x)=>{return(
+                  Math.sin(x))}; const cos = (x)=>{                     return Math.cos(x);}; const floor
+                  =(x) =>{return Math.floor(x);};                         const round = (x)=>{return Math
+                 .round(x);}; const memset=(arr,                           val, count) => { for (let i = 0;
+                 i < count; i++) {arr[i]=val;}};                           let updateArea= ()=>{clearArea()
+                  ;for(let j = 0;j < 6.28;j+=0.07                         ){for (let i=0; i <6.28;i+=0.02)
+                  {const c = sin(i); const d=cos(j)                     ;const e = sin(A);const f = sin(j)
+                   ;const g =cos(A);const h =d+2;const               D=1/(c* h * e + f * g + 5);const l=
+                     cos(i); const m = cos(B);const n = sin(B); const t = c * h *g - f*e;const x=round
+                       (40 + 30 * D * (l * h * m - t * n)); const y = round(12 + 15 * D * (l * h*n +
+                          t * m));const o = x + areaW * y; const N = round(8 * ((f * e- c * d*g)*
+                             m - c * d * e - f *g-l * d * n)); if (y >= 0 && y < areaH && x>=0
+                                 && x < areaW && D > area[o] ) { area[o] = D; drawToArea(x
+                                    ,y,N > 0?N:0);}}}};const loop= () =>{ updateArea()
+                                          ;renderArea() ; A += 0.04 ; B += 0.02;
+                                                requestAnimationFrame(loop)}
+                                                       loop()};main()
+
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    if (preferredTheme === 'dark') {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        document.querySelector('.code-editor').classList.remove('light-mode');
+        document.querySelector('.code-editor').classList.add('dark-mode');
+        themeSwitch.checked = true;
+    }
+
+    themeSwitch.addEventListener('change', () => {
+        if (themeSwitch.checked) {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+            document.querySelector('.code-editor').classList.remove('light-mode');
+            document.querySelector('.code-editor').classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+            document.querySelector('.code-editor').classList.remove('dark-mode');
+            document.querySelector('.code-editor').classList.add('light-mode');
+        }
+    });
+</script>
+</body>
+</html>
