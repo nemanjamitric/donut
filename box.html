@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Donut</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Donut</title>
+
+        <meta name="description" content="Explore the mesmerizing Donut visualization.">
+
+        <meta name="keywords" content="donut, code, art, visualization, javascript, Nemanja Mitric">
+
+        <link rel="canonical" href="https://nemanjamitric.github.io/donut/">
+
+        <meta property="og:title" content="Donut - A Fascinating Code Art Visualization">
+        <meta property="og:description" content="Explore the mesmerizing Donut visualization.">
+        <meta property="og:image" content="https://ibb.co/HKVxd7n">
+        <meta property="og:url" content="https://nemanjamitric.github.io/donut/">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Donut - A Fascinating Code Art Visualization">
+        <meta name="twitter:description" content="Explore the mesmerizing Donut visualization.">
+        <meta name="twitter:image" content="https://ibb.co/HKVxd7n">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+        <link rel="apple-touch-icon" sizes="180x180"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/favicon-16x16.png">
+        <link rel="manifest"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/site.webmanifest">
+        <link rel="mask-icon"
+            href="https://raw.githubusercontent.com/nemanjamitric/donut/master/assets/icon/safari-pinned-tab.svg"
+            color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.6s, color 0.6s;
+        }
+
+        body.light-mode {
+            background-color: #fff;
+            color: #000;
+        }
+
+        body.dark-mode {
+            background-color: #111;
+            color: #fff;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .header-container h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .header-container p {
+            font-size: 18px;
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .switch-label {
+            margin-right: 10px;
+        }
+
+        .switch {
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            background-color: #ccc;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .slider {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.2s;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]:checked+.slider {
+            transform: translateX(24px);
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .donut-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            margin-top: -50px
+        }
+
+        section {
+            min-height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <div class="header-container">
+            <p>Nemanja Mitric</p>
+            <h1>Box</h1>
+            <div class="switch-container">
+                <label class="switch-label" for="theme-switch">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="theme-switch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="donut-container">
+                <canvas id="canvasId"></canvas>
+            </div>
+        </div>
+    </section>
+    <script>
+const canvas = document.getElementById('canvasId');
+const context = canvas.getContext('2d');
+const scale = 0.4;
+const vertices = [
+  [-scale, -scale, -scale], [scale, -scale, -scale], [scale, scale, -scale], [-scale, scale, -scale],
+  [-scale, -scale,  scale], [scale, -scale,  scale], [scale, scale,  scale], [-scale, scale,  scale]
+];
+let angle = 0;
+
+function rotateX(point, angle) {
+  const [x, y, z] = point;
+  const s = Math.sin(angle);
+  const c = Math.cos(angle);
+  return [x, c * y - s * z, s * y + c * z];
+}
+
+function rotateY(point, angle) {
+  const [x, y, z] = point;
+  const s = Math.sin(angle);
+  const c = Math.cos(angle);
+  return [c * x - s * z, y, s * x + c * z];
+}
+
+function rotateZ(point, angle) {
+  const [x, y, z] = point;
+  const s = Math.sin(angle);
+  const c = Math.cos(angle);
+  return [c * x - s * y, s * x + c * y, z];
+}
+
+function drawLine(v1, v2) {
+  context.beginPath();
+  context.moveTo(v1[0], v1[1]);
+  context.lineTo(v2[0], v2[1]);
+  context.stroke();
+}
+
+function render() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.save();
+  context.translate(canvas.width / 2, canvas.height / 2);
+  
+  const transformedVertices = vertices.map(vertex => {
+    let rotated = rotateX(vertex, angle);
+    rotated = rotateY(rotated, angle);
+    rotated = rotateZ(rotated, angle);
+    return [rotated[0] * 100, rotated[1] * 100]; // Scale for visibility
+  });
+
+  for (let i = 0; i < 4; i++) {
+    drawLine(transformedVertices[i], transformedVertices[(i + 1) % 4]);
+    drawLine(transformedVertices[i + 4], transformedVertices[(i + 1) % 4 + 4]);
+    drawLine(transformedVertices[i], transformedVertices[i + 4]);
+  }
+
+  context.restore();
+  angle += 0.01;
+  requestAnimationFrame(render);
+}
+
+render();
+
+</script>
+</body>
+
+</html>
