@@ -156,9 +156,44 @@
             margin-top: -50px
         }
 
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+
         section {
-            height: 180vh;
+            min-height: 100vh;
             overflow: hidden;
+        }
+
+        pre {
+            font-size: 1.6vw;
+        }
+
+        @media (min-width: 768px) {
+            pre {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -181,6 +216,10 @@
             <div class="donut-container">
                 <pre class="donut" id="areaId"></pre>
             </div>
+        </div>
+    </section>
+    <section>
+        <div class="main-container">
             <div class="code-editor">
                 <pre>                                     const areaW=80;
                                const areaH = 24;const area
@@ -211,7 +250,7 @@ i &lt; count; i++) {arr[i]=val;}};                           let updateArea= ()=
             </div>
         </div>
     </section>
-    <section>
+    <section class="container">
         <h2>Understanding the ASCII Donut</h2>
         <p>
             ASCII art, using characters to represent images, dates back to the early days of computing. The 3D spinning
