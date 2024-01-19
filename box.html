@@ -67,9 +67,10 @@
             justify-content: space-around;
         }
 
-        .header-container h1 {
-            font-size: 24px;
-            font-weight: 600;
+        .header-container a {
+            font-size: 18px;
+            color: #fff;
+            text-decoration: none;
         }
 
         .header-container p {
@@ -141,7 +142,7 @@
 
     <section>
         <div class="header-container">
-            <p>Nemanja Mitric</p>
+            <a href="www.linkedin.com/in/nemanja-mitric" target="_blank">Nemanja Mitric</a>
             <h1>Box</h1>
             <div class="switch-container">
                 <label class="switch-label" for="theme-switch">Dark Mode</label>
@@ -158,69 +159,69 @@
         </div>
     </section>
     <script>
-const canvas = document.getElementById('canvasId');
-const context = canvas.getContext('2d');
-const scale = 0.4;
-const vertices = [
-  [-scale, -scale, -scale], [scale, -scale, -scale], [scale, scale, -scale], [-scale, scale, -scale],
-  [-scale, -scale,  scale], [scale, -scale,  scale], [scale, scale,  scale], [-scale, scale,  scale]
-];
-let angle = 0;
+        const canvas = document.getElementById('canvasId');
+        const context = canvas.getContext('2d');
+        const scale = 0.4;
+        const vertices = [
+            [-scale, -scale, -scale], [scale, -scale, -scale], [scale, scale, -scale], [-scale, scale, -scale],
+            [-scale, -scale, scale], [scale, -scale, scale], [scale, scale, scale], [-scale, scale, scale]
+        ];
+        let angle = 0;
 
-function rotateX(point, angle) {
-  const [x, y, z] = point;
-  const s = Math.sin(angle);
-  const c = Math.cos(angle);
-  return [x, c * y - s * z, s * y + c * z];
-}
+        function rotateX(point, angle) {
+            const [x, y, z] = point;
+            const s = Math.sin(angle);
+            const c = Math.cos(angle);
+            return [x, c * y - s * z, s * y + c * z];
+        }
 
-function rotateY(point, angle) {
-  const [x, y, z] = point;
-  const s = Math.sin(angle);
-  const c = Math.cos(angle);
-  return [c * x - s * z, y, s * x + c * z];
-}
+        function rotateY(point, angle) {
+            const [x, y, z] = point;
+            const s = Math.sin(angle);
+            const c = Math.cos(angle);
+            return [c * x - s * z, y, s * x + c * z];
+        }
 
-function rotateZ(point, angle) {
-  const [x, y, z] = point;
-  const s = Math.sin(angle);
-  const c = Math.cos(angle);
-  return [c * x - s * y, s * x + c * y, z];
-}
+        function rotateZ(point, angle) {
+            const [x, y, z] = point;
+            const s = Math.sin(angle);
+            const c = Math.cos(angle);
+            return [c * x - s * y, s * x + c * y, z];
+        }
 
-function drawLine(v1, v2) {
-  context.beginPath();
-  context.moveTo(v1[0], v1[1]);
-  context.lineTo(v2[0], v2[1]);
-  context.stroke();
-}
+        function drawLine(v1, v2) {
+            context.beginPath();
+            context.moveTo(v1[0], v1[1]);
+            context.lineTo(v2[0], v2[1]);
+            context.stroke();
+        }
 
-function render() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.save();
-  context.translate(canvas.width / 2, canvas.height / 2);
-  
-  const transformedVertices = vertices.map(vertex => {
-    let rotated = rotateX(vertex, angle);
-    rotated = rotateY(rotated, angle);
-    rotated = rotateZ(rotated, angle);
-    return [rotated[0] * 100, rotated[1] * 100]; // Scale for visibility
-  });
+        function render() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.save();
+            context.translate(canvas.width / 2, canvas.height / 2);
 
-  for (let i = 0; i < 4; i++) {
-    drawLine(transformedVertices[i], transformedVertices[(i + 1) % 4]);
-    drawLine(transformedVertices[i + 4], transformedVertices[(i + 1) % 4 + 4]);
-    drawLine(transformedVertices[i], transformedVertices[i + 4]);
-  }
+            const transformedVertices = vertices.map(vertex => {
+                let rotated = rotateX(vertex, angle);
+                rotated = rotateY(rotated, angle);
+                rotated = rotateZ(rotated, angle);
+                return [rotated[0] * 100, rotated[1] * 100]; // Scale for visibility
+            });
 
-  context.restore();
-  angle += 0.01;
-  requestAnimationFrame(render);
-}
+            for (let i = 0; i < 4; i++) {
+                drawLine(transformedVertices[i], transformedVertices[(i + 1) % 4]);
+                drawLine(transformedVertices[i + 4], transformedVertices[(i + 1) % 4 + 4]);
+                drawLine(transformedVertices[i], transformedVertices[i + 4]);
+            }
 
-render();
+            context.restore();
+            angle += 0.01;
+            requestAnimationFrame(render);
+        }
 
-</script>
+        render();
+
+    </script>
 </body>
 
 </html>
